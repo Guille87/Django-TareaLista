@@ -7,7 +7,7 @@ Esta aplicación web desarrollada con Django permite a los usuarios registrarse,
 **Edición de Tareas:** Los usuarios pueden editar las tareas existentes para actualizar su título o descripción.  
 **Marcado de Tareas como Completadas:** Los usuarios pueden marcar las tareas como completadas una vez que hayan terminado de realizarlas.  
 **Eliminación de Tareas:** Los usuarios pueden eliminar las tareas que ya no necesitan.  
-Filtrado de Tareas: La aplicación permite a los usuarios buscar tareas por título para encontrar rápidamente la que están buscando.  
+**Filtrado de Tareas:** La aplicación permite a los usuarios buscar tareas por título para encontrar rápidamente la que están buscando.  
 ## Instrucciones de instalación
 **Clona** o **descarga** el repositorio en tu máquina local.  
 Asegúrate de **tener Python** y **Django** instalados en tu sistema.  
