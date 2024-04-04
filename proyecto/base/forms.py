@@ -4,6 +4,7 @@ from django.contrib.auth.forms import UserChangeForm
 
 class CustomUserChangeForm(UserChangeForm):
     password = forms.CharField(label="Contraseña", strip=False, widget=forms.PasswordInput)
+    confirm_password = forms.CharField(label="Confirmar contraseña", strip=False, widget=forms.PasswordInput)
 
     class Meta(UserChangeForm.Meta):
         fields = ['username', 'password']

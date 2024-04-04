@@ -1,4 +1,9 @@
 {% extends 'base/principal.html' %}
+
+{% block title %}
+    Crear Nueva Tarea
+{% endblock title %}
+
 {% block content %}
 
 <div class="barra-superior">
@@ -9,7 +14,7 @@
     <form method="post" action="">
         {% csrf_token %}
         {{form.as_p}}
-        <input class="boton" type="submit" value="Enviar">
+        <input class="boton" type="submit" value="aaaEnviar">
     </form>
 </div>
 

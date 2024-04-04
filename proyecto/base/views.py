@@ -81,12 +81,6 @@ class EditarPerfil(UpdateView):
         """
         user = form.save(commit=False)  # No guarda el usuario todavía para poder hacer validaciones adicionales
 
-        # Agrega un mensaje de registro para verificar si el método se ejecuta correctamente
-        print("Formulario válido.")
-
-        # Obtiene la contraseña actual del usuario desde la base de datos
-        current_password = self.request.user.password
-
         # Obtiene la contraseña actual proporcionada en el formulario
         entered_password = form.cleaned_data.get('password')
 
@@ -98,13 +92,14 @@ class EditarPerfil(UpdateView):
 
         # Cambiar la contraseña si se proporcionó una nueva
         nueva_contrasenia = self.request.POST.get('new_password')
+        confirm_password = self.request.POST.get('confirm_password')
+        if nueva_contrasenia != confirm_password:
+            form.add_error('confirm_password', 'Las contraseñas no coinciden.')
+            return self.form_invalid(form)
 
         if nueva_contrasenia:
             user.set_password(nueva_contrasenia)
             user.save()
-
-            # Agrega un mensaje de registro para verificar si la contraseña se cambió correctamente
-            print("Contraseña cambiada correctamente.")
         return super().form_valid(form)
 
     def form_invalid(self, form):

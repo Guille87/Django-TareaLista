@@ -1,4 +1,9 @@
 {% extends 'base/principal.html' %}
+
+{% block title %}
+    Editar Perfil
+{% endblock title %}
+
 {% block content %}
 
 <div class="barra-superior">
@@ -25,6 +30,13 @@
         <div>
             <label for="id_new_password">Nueva contraseña:</label>
             <input type="password" name="new_password" id="id_new_password">
+        </div>
+        <div>
+            <label for="id_confirm_password">Confirmar contraseña:</label>
+            <input type="password" name="confirm_password" id="id_confirm_password">
+            {% if form.errors.confirm_password %}
+                <p class="error-message">{{ form.errors.confirm_password }}</p>
+            {% endif %}
         </div>
         <!-- Botón de enviar -->
         <button style="margin-top: 10px;" class="boton" type="submit">Guardar cambios</button>
