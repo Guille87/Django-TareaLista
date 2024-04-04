@@ -13,6 +13,7 @@ class Tarea(models.Model):
                                    blank=True)  # El campo puede dejarse en blanco
     completo = models.BooleanField(default=False)  # Estado de completitud de la tarea
     creado = models.DateTimeField(auto_now_add=True)  # Fecha y hora de creación de la tarea
+    completado = models.DateTimeField(null=True, blank=True)  # Fecha y hora de la tarea completada
 
     def __str__(self):
         """

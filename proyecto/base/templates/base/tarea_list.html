@@ -2,25 +2,32 @@
 {% block content %}
 
 <div class="barra-superior">
+    <!-- Barra superior que muestra el saludo y el número de tareas incompletas -->
     <div>
         <h1>Hola {{request.user|title}}</h1>
         <h3 style="margin: 0">Tienes <i>{{count}}</i> tarea{{count|pluralize}} incompleta{{count|pluralize}}</h3>
     </div>
     {% if request.user.is_authenticated %}
+        <!-- Enlace para dirigir a los usuarios a la página de edición de perfil -->
+        <a href="{% url 'editar-perfil' request.user.pk %}">Editar perfil</a>
+        <!-- Formulario para cerrar sesión si el usuario está autenticado -->
         <form action="{% url 'logout' %}" method="post">
             {% csrf_token %}
             <button type="submit">Salir</button>
         </form>
     {% else %}
+        <!-- Enlace para iniciar sesión si el usuario no está autenticado -->
         <a href="{% url 'login' %}">Ingresar</a>
     {% endif %}
 </div>
 
 <div id="envoltorio-agregar-buscar">
+    <!-- Formulario para buscar tareas -->
     <form method="get" style="margin-top: 20px; display: flex;">
         <input type="text" name="area-buscar" value="{{valor_buscado}}">
         <input class="boton" type="submit" value="Buscar">
     </form>
+    <!-- Enlace para agregar una nueva tarea -->
     <a id="enlace-agregar" href="{% url 'crear-tarea' %}">&#x1F7A5;</a>
 </div>
 
@@ -28,24 +35,89 @@
     {% for tarea in tareas %}
     <div class="envoltorio-tarea">
         {% if tarea.completo %}
+        <!-- Si la tarea está completa, se muestra con un estilo diferente y un enlace a editar -->
         <div class="titulo-tarea">
             <div class="icono-tarea-completa"></div>
             <i><s><a href="{% url 'editar-tarea' tarea.id %}">{{tarea}}</a></s></i>
         </div>
-        <a class="enlace-eliminar" href="{% url 'eliminar-tarea' tarea.id %}">&#x2A2F;</a>
+        <div class="datos-tarea">
+            <div class="fecha-creacion" data-utc="{{ tarea.creado|date:'c' }}">
+                <span>Fecha de creación:</span> {{ tarea.creado }}
+            </div>
+            <!-- Mostrar la fecha de completado -->
+            <div class="fecha-completado" data-utc="{{ tarea.completado|date:'c' }}">
+                <span>Fecha de finalización:</span> {{ tarea.completado }}
+            </div>
+        </div>
         {% else %}
+        <!-- Si la tarea está incompleta, se muestra con un estilo diferente y un enlace a editar -->
         <div class="titulo-tarea">
             <div class="icono-tarea-incompleta"></div>
             <a href="{% url 'editar-tarea' tarea.id %}">{{tarea}}</a>
         </div>
-        <a class="enlace-eliminar" href="{% url 'eliminar-tarea' tarea.id %}">&#x2A2F;</a>
+        <div class="datos-tarea">
+            <!-- Mostrar la fecha de creación de la tarea -->
+            <div class="fecha-creacion" data-utc="{{ tarea.creado|date:'c' }}">
+                <span>Fecha de creación:</span> {{ tarea.creado }}
+            </div>
+        </div>
         {% endif %}
+        <!-- Enlace para eliminar la tarea -->
+        <a class="enlace-eliminar" href="{% url 'eliminar-tarea' tarea.id %}">&#x2A2F;</a>
     </div>
-
     {% empty %}
+    <!-- Si no hay tareas, se muestra un mensaje -->
     <h3>No hay elementos en esta lista</h3>
-
     {% endfor %}
+
+    <!-- Enlaces de paginación -->
+    {% if is_paginated %}
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+            <!-- Enlace a la primera página -->
+            <a href="?page=1{% if valor_buscado %}&area-buscar={{ valor_buscado }}{% endif %}">&laquo; Primera</a>
+            <!-- Enlace a la página anterior -->
+            <a href="?page={{ page_obj.previous_page_number }}{% if valor_buscado %}&area-buscar={{ valor_buscado }}{% endif %}">Anterior</a>
+            {% endif %}
+
+            <!-- Información sobre la página actual -->
+            <span class="current">
+                Página {{page_obj.number}} de {{paginator.num_pages}}.
+            </span>
+
+            {% if page_obj.has_next %}
+            <!-- Enlace a la página siguiente -->
+            <a href="?page={{ page_obj.next_page_number }}{% if valor_buscado %}&area-buscar={{ valor_buscado }}{% endif %}">Siguiente</a>
+            <!-- Enlace a la última página -->
+            <a href="?page={{ paginator.num_pages }}{% if valor_buscado %}&area-buscar={{ valor_buscado }}{% endif %}">Última &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+    {% endif %}
 </div>
+
+<script>
+    // Este script convierte las fechas UTC en la página a la hora local del usuario
+    document.addEventListener("DOMContentLoaded", function() {
+        // Seleccionar todas las fechas que tienen el atributo data-utc
+        var fechas = document.querySelectorAll("[data-utc]");
+
+        // Iterar sobre cada fecha y convertirla a la hora local del usuario
+        fechas.forEach(function(fecha) {
+            // Obtener la fecha UTC del atributo data-utc
+            var fechaUTC = new Date(fecha.getAttribute("data-utc"));
+
+            // Convertir la fecha UTC a la hora local del usuario
+            var fechaLocal = fechaUTC.toLocaleString();
+
+            // Obtener el texto dentro del primer span dentro del div de fecha
+            var spanText = fecha.querySelector('span').textContent;
+
+            // Reemplazar el contenido del div de fecha con el texto del span y la fecha local
+            fecha.innerHTML = '<span>' + spanText + '</span> ' + fechaLocal;
+        });
+    });
+</script>
 
 {% endblock content %}

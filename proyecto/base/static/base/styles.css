@@ -45,8 +45,8 @@ p {
 .envoltorio-tarea {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 20px;
+    justify-content: space-between; /* Alinear elementos a los extremos */
+    padding: 10px;
     background-color: #FFFFFF;
     border-top: 1px solid rgb(225, 225, 225)
 }
@@ -73,6 +73,14 @@ p {
     width: 20px;
     background-color: rgb(218, 218, 218);
     border-radius: 50px;
+}
+
+.fecha-creacion,
+.fecha-completado {
+    margin-right: 10px; /* Ajustar el margen entre las fechas */
+    flex: 1; /* El espacio restante se distribuirá entre las fechas y el enlace */
+    text-align: right; /* Alinear las fechas y el enlace a la derecha */
+    margin-left: auto; /* Empujar las fechas y el enlace hacia la derecha */
 }
 
 .enlace-eliminar {
@@ -124,4 +132,12 @@ label {
 
 .cuerpo-tarjeta {
     padding: 20px
+}
+
+.datos-tarea {
+    flex: 1; /* El espacio restante se distribuirá entre las fechas y el enlace */
+    display: flex;
+    flex-direction: column; /* Establecer la dirección del eje principal como columna */
+    align-items: flex-end; /* Alinear los elementos al final del eje transversal */
+    justify-content: space-between;
 }
