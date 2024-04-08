@@ -1,0 +1,205 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-04-06 02:28+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? "
+"1 : 2;\n"
+
+#: .\base\forms.py:9 .\base\models.py:12
+msgid "Usuario"
+msgstr "Usuario"
+
+#: .\base\forms.py:10 .\base\forms.py:13
+msgid "Contraseña"
+msgstr "Contraseña"
+
+#: .\base\forms.py:14 .\base\templates\base\editar_perfil.html:37
+msgid "Confirmar contraseña"
+msgstr "Confirmar contraseña"
+
+#: .\base\models.py:13
+msgid "Título"
+msgstr "Título"
+
+#: .\base\models.py:14
+msgid "Descripción"
+msgstr "Descripción"
+
+#: .\base\models.py:17
+msgid "Completo"
+msgstr "Completo"
+
+#: .\base\templates\base\editar_perfil.html:6
+#: .\base\templates\base\tarea_list.html:28
+msgid "Editar Perfil"
+msgstr "Editar Perfil"
+
+#: .\base\templates\base\editar_perfil.html:12
+#: .\base\templates\base\tarea_confirm_delete.html:12
+#: .\base\templates\base\tarea_form.html:12
+msgid "Volver"
+msgstr "Volver"
+
+#: .\base\templates\base\editar_perfil.html:20
+msgid "Nombre de usuario"
+msgstr "Nombre de usuario"
+
+#: .\base\templates\base\editar_perfil.html:25
+msgid "Contraseña actual"
+msgstr "Contraseña actual"
+
+#: .\base\templates\base\editar_perfil.html:33
+msgid "Nueva contraseña"
+msgstr "Nueva contraseña"
+
+#: .\base\templates\base\editar_perfil.html:44
+msgid "Guardar cambios"
+msgstr "Guardar cambios"
+
+#: .\base\templates\base\login.html:6
+msgid "Iniciar Sesión"
+msgstr "Iniciar Sesión"
+
+#: .\base\templates\base\login.html:12 .\base\templates\base\login.html:19
+#: .\base\templates\base\tarea_list.html:36
+msgid "Ingresar"
+msgstr "Ingresar"
+
+#: .\base\templates\base\login.html:21
+msgid "No tienes una cuenta?"
+msgstr "No tienes una cuenta?"
+
+#: .\base\templates\base\login.html:21
+msgid "Regístrate"
+msgstr "Regístrate"
+
+#: .\base\templates\base\principal.html:7
+msgid "Mi Lista de Tareas"
+msgstr "Mi Lista de Tareas"
+
+#: .\base\templates\base\registro.html:6
+msgid "Registro"
+msgstr "Registro"
+
+#: .\base\templates\base\registro.html:12
+msgid "Registrarse"
+msgstr "Registrarse"
+
+#: .\base\templates\base\registro.html:24
+msgid "Registrar"
+msgstr "Registrar"
+
+#: .\base\templates\base\registro.html:26
+msgid "Ya tienes una cuenta?"
+msgstr "Ya tienes una cuenta?"
+
+#: .\base\templates\base\registro.html:26
+msgid "Ingresa"
+msgstr "Ingresa"
+
+#: .\base\templates\base\tarea_confirm_delete.html:6
+msgid "Confirmar Eliminación de Tarea"
+msgstr "Confirmar Eliminación de Tarea"
+
+#: .\base\templates\base\tarea_confirm_delete.html:18
+msgid "Vas a eliminar esta tarea"
+msgstr "Vas a eliminar esta tarea"
+
+#: .\base\templates\base\tarea_confirm_delete.html:19
+msgid "Eliminar"
+msgstr "Eliminar"
+
+#: .\base\templates\base\tarea_form.html:6
+msgid "Crear Nueva Tarea"
+msgstr "Crear Nueva Tarea"
+
+#: .\base\templates\base\tarea_form.html:19
+msgid "Enviar"
+msgstr "Enviar"
+
+#: .\base\templates\base\tarea_list.html:6
+msgid "Lista de Tareas Pendientes"
+msgstr "Lista de Tareas Pendientes"
+
+#: .\base\templates\base\tarea_list.html:14
+msgid "Hola"
+msgstr "Hola"
+
+#: .\base\templates\base\tarea_list.html:16
+msgid "Tienes"
+msgstr "Tienes"
+
+#: .\base\templates\base\tarea_list.html:18
+msgid "tarea"
+msgstr "tarea"
+
+#: .\base\templates\base\tarea_list.html:19
+msgid "incompleta"
+msgstr "incompleta"
+
+#: .\base\templates\base\tarea_list.html:21
+msgid "tareas"
+msgstr "tareas"
+
+#: .\base\templates\base\tarea_list.html:22
+msgid "incompletas"
+msgstr "incompletas"
+
+#: .\base\templates\base\tarea_list.html:32
+msgid "Salir"
+msgstr "Salir"
+
+#: .\base\templates\base\tarea_list.html:44
+msgid "Buscar"
+msgstr "Buscar"
+
+#: .\base\templates\base\tarea_list.html:61
+#: .\base\templates\base\tarea_list.html:77
+msgid "Fecha de creación"
+msgstr "Fecha de creación"
+
+#: .\base\templates\base\tarea_list.html:65
+msgid "Fecha de finalización"
+msgstr "Fecha de finalización"
+
+#: .\base\templates\base\tarea_list.html:86
+msgid "No hay elementos en esta lista"
+msgstr "No hay elementos en esta lista"
+
+#: .\base\templates\base\tarea_list.html:95
+msgid "Primera"
+msgstr "Primera"
+
+#: .\base\templates\base\tarea_list.html:97
+msgid "Anterior"
+msgstr "Anterior"
+
+#: .\base\templates\base\tarea_list.html:102
+msgid "Página"
+msgstr "Página"
+
+#: .\base\templates\base\tarea_list.html:102
+msgid "de"
+msgstr "de"
+
+#: .\base\templates\base\tarea_list.html:107
+msgid "Siguiente"
+msgstr "Siguiente"
+
+#: .\base\templates\base\tarea_list.html:109
+msgid "Última"
+msgstr "Última"

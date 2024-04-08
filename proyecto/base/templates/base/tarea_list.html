@@ -1,7 +1,9 @@
 {% extends 'base/principal.html' %}
 
+{% load i18n %}
+
 {% block title %}
-    Lista de Tareas Pendientes
+    {% trans "Lista de Tareas Pendientes" %}
 {% endblock title %}
 
 {% block content %}
@@ -9,20 +11,43 @@
 <div class="barra-superior">
     <!-- Barra superior que muestra el saludo y el número de tareas incompletas -->
     <div>
-        <h1>Hola {{request.user|title}}</h1>
-        <h3 style="margin: 0">Tienes <i>{{count}}</i> tarea{{count|pluralize}} incompleta{{count|pluralize}}</h3>
+        <h1>{% trans "Hola" %} {{request.user|title}}</h1>
+        <h3 style="margin: 0">
+            {% trans "Tienes" %} <i>{{count}}</i>
+            {% if count == 1 %}
+                {% trans "tarea" %}
+                {% trans "incompleta" %}
+            {% else %}
+                {% trans "tareas" %}
+                {% trans "incompletas" %}
+            {% endif %}
+        </h3>
     </div>
+    <form action="{% url 'set_language' %}" method="post">
+        {% csrf_token %}
+        <select name="language">
+            {% get_current_language as LANGUAGE_CODE %}
+            {% get_available_languages as LANGUAGES %}
+            {% get_language_info_list for LANGUAGES as languages %}
+            {% for language in languages %}
+                <option value="{{ language.code }}" {% if language.code == LANGUAGE_CODE %} selected {% endif %}>
+                    {{ language.name_local }} ({{ language.code }})
+                </option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="Switch">
+    </form>
     {% if request.user.is_authenticated %}
         <!-- Enlace para dirigir a los usuarios a la página de edición de perfil -->
-        <a href="{% url 'editar-perfil' request.user.pk %}">Editar perfil</a>
+        <a href="{% url 'editar-perfil' request.user.pk %}">{% trans "Editar Perfil" %}</a>
         <!-- Formulario para cerrar sesión si el usuario está autenticado -->
         <form action="{% url 'logout' %}" method="post">
             {% csrf_token %}
-            <button type="submit">Salir</button>
+            <button type="submit">{% trans "Salir" %}</button>
         </form>
     {% else %}
         <!-- Enlace para iniciar sesión si el usuario no está autenticado -->
-        <a href="{% url 'login' %}">Ingresar</a>
+        <a href="{% url 'login' %}">{% trans "Ingresar" %}</a>
     {% endif %}
 </div>
 
@@ -30,7 +55,7 @@
     <!-- Formulario para buscar tareas -->
     <form method="get" style="margin-top: 20px; display: flex;">
         <input type="text" name="area-buscar" value="{{valor_buscado}}">
-        <input class="boton" type="submit" value="Buscar">
+        <input class="boton" type="submit" value="{% trans 'Buscar' %}">
     </form>
     <!-- Enlace para agregar una nueva tarea -->
     <a id="enlace-agregar" href="{% url 'crear-tarea' %}">&#x1F7A5;</a>
@@ -47,11 +72,11 @@
         </div>
         <div class="datos-tarea">
             <div class="fecha-creacion" data-utc="{{ tarea.creado|date:'c' }}">
-                <span>Fecha de creación:</span> {{ tarea.creado }}
+                <span>{% trans "Fecha de creación" %}:</span> {{ tarea.creado }}
             </div>
             <!-- Mostrar la fecha de completado -->
             <div class="fecha-completado" data-utc="{{ tarea.completado|date:'c' }}">
-                <span>Fecha de finalización:</span> {{ tarea.completado }}
+                <span>{% trans "Fecha de finalización" %}:</span> {{ tarea.completado }}
             </div>
         </div>
         {% else %}
@@ -63,7 +88,7 @@
         <div class="datos-tarea">
             <!-- Mostrar la fecha de creación de la tarea -->
             <div class="fecha-creacion" data-utc="{{ tarea.creado|date:'c' }}">
-                <span>Fecha de creación:</span> {{ tarea.creado }}
+                <span>{% trans "Fecha de creación" %}:</span> {{ tarea.creado }}
             </div>
         </div>
         {% endif %}
@@ -72,7 +97,7 @@
     </div>
     {% empty %}
     <!-- Si no hay tareas, se muestra un mensaje -->
-    <h3>No hay elementos en esta lista</h3>
+    <h3>{% trans "No hay elementos en esta lista" %}</h3>
     {% endfor %}
 
     <!-- Enlaces de paginación -->
@@ -81,21 +106,21 @@
         <span class="step-links">
             {% if page_obj.has_previous %}
             <!-- Enlace a la primera página -->
-            <a href="?page=1{% if valor_buscado %}&area-buscar={{ valor_buscado }}{% endif %}">&laquo; Primera</a>
+            <a href="?page=1{% if valor_buscado %}&area-buscar={{ valor_buscado }}{% endif %}">&laquo; {% trans "Primera" %}</a>
             <!-- Enlace a la página anterior -->
-            <a href="?page={{ page_obj.previous_page_number }}{% if valor_buscado %}&area-buscar={{ valor_buscado }}{% endif %}">Anterior</a>
+            <a href="?page={{ page_obj.previous_page_number }}{% if valor_buscado %}&area-buscar={{ valor_buscado }}{% endif %}">{% trans "Anterior" %}</a>
             {% endif %}
 
             <!-- Información sobre la página actual -->
             <span class="current">
-                Página {{page_obj.number}} de {{paginator.num_pages}}.
+                {% trans "Página" %} {{page_obj.number}} {% trans "de" %} {{paginator.num_pages}}.
             </span>
 
             {% if page_obj.has_next %}
             <!-- Enlace a la página siguiente -->
-            <a href="?page={{ page_obj.next_page_number }}{% if valor_buscado %}&area-buscar={{ valor_buscado }}{% endif %}">Siguiente</a>
+            <a href="?page={{ page_obj.next_page_number }}{% if valor_buscado %}&area-buscar={{ valor_buscado }}{% endif %}">{% trans "Siguiente" %}</a>
             <!-- Enlace a la última página -->
-            <a href="?page={{ paginator.num_pages }}{% if valor_buscado %}&area-buscar={{ valor_buscado }}{% endif %}">Última &raquo;</a>
+            <a href="?page={{ paginator.num_pages }}{% if valor_buscado %}&area-buscar={{ valor_buscado }}{% endif %}">{% trans "Última" %} &raquo;</a>
             {% endif %}
         </span>
     </div>

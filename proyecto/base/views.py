@@ -1,16 +1,15 @@
 from django.contrib.auth import login, authenticate
-from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.contrib.auth.views import LoginView
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.utils import timezone
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormView
 from django.views.generic.list import ListView
 
-from .forms import CustomUserChangeForm
+from .forms import CustomUserChangeForm, CustomAuthenticationForm, CustomUserCreationForm
 from .models import Tarea
 
 
@@ -21,7 +20,7 @@ class Logueo(LoginView):
     Redirige a la página de tareas ('tareas') si el usuario ya está autenticado.
     """
     template_name = "base/login.html"
-    field = '__all__'
+    authentication_form = CustomAuthenticationForm
     redirect_authenticated_user = True
 
     def get_success_url(self):
@@ -38,7 +37,7 @@ class PaginaRegistro(FormView):
     Redirige a la página de tareas ('tareas') después de un registro exitoso.
     """
     template_name = 'base/registro.html'
-    form_class = UserCreationForm
+    form_class = CustomUserCreationForm
     redirect_authenticated_user = True
     success_url = reverse_lazy('tareas')
 
@@ -146,6 +145,11 @@ class ListaPendientes(LoginRequiredMixin, ListView):
         context['count'] = self.incompletas_count
         context['valor_buscado'] = self.request.GET.get('area-buscar') or ''
         return context
+
+
+def cambiar_idioma(request):
+    # Renderiza la plantilla 'tarea_list.html' para cambiar el idioma.
+    return render(request, 'tarea_list.html')
 
 
 class DetalleTarea(LoginRequiredMixin, DetailView):

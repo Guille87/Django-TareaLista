@@ -1,13 +1,15 @@
 {% extends 'base/principal.html' %}
 
+{% load i18n %}
+
 {% block title %}
-    Editar Perfil
+    {% trans "Editar Perfil" %}
 {% endblock title %}
 
 {% block content %}
 
 <div class="barra-superior">
-    <a href="{% url 'tareas' %}">&#x1F860; Volver</a>
+    <a href="{% url 'tareas' %}">&#x1F860; {% trans "Volver" %}</a>
 </div>
 
 <div class="cuerpo-tarjeta">
@@ -15,31 +17,31 @@
         {% csrf_token %}
         <!-- Mostrar el nombre de usuario actual -->
         <div>
-            <label>Nombre de usuario:</label>
-            <p>{{ form.username }}</p>
+            <label>{% trans "Nombre de usuario" %}:</label>
+            {{form.username}}
         </div>
         <!-- Campo de contraseña actual -->
         <div>
-            <label for="id_password">Contraseña actual:</label>
-            {{ form.password }}
+            <label>{% trans "Contraseña actual" %}:</label>
+            {{form.password}}
             {% if form.errors.password %}
                 <p class="error-message">{{ form.errors.password }}</p>
             {% endif %}
         </div>
         <!-- Campo de nueva contraseña -->
         <div>
-            <label for="id_new_password">Nueva contraseña:</label>
+            <label for="id_new_password">{% trans "Nueva contraseña" %}:</label>
             <input type="password" name="new_password" id="id_new_password">
         </div>
         <div>
-            <label for="id_confirm_password">Confirmar contraseña:</label>
+            <label for="id_confirm_password">{% trans "Confirmar contraseña" %}:</label>
             <input type="password" name="confirm_password" id="id_confirm_password">
             {% if form.errors.confirm_password %}
                 <p class="error-message">{{ form.errors.confirm_password }}</p>
             {% endif %}
         </div>
         <!-- Botón de enviar -->
-        <button style="margin-top: 10px;" class="boton" type="submit">Guardar cambios</button>
+        <button style="margin-top: 10px;" class="boton" type="submit">{% trans "Guardar cambios" %}</button>
     </form>
 </div>
 

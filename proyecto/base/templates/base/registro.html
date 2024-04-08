@@ -1,13 +1,15 @@
 {% extends 'base/principal.html' %}
 
+{% load i18n %}
+
 {% block title %}
-    Registro
+    {% trans "Registro" %}
 {% endblock title %}
 
 {% block content %}
 
 <div class="barra-superior">
-    <h1>Registrarse</h1>
+    <h1>{% trans "Registrarse" %}</h1>
 </div>
 
 <div class="cuerpo-tarjeta">
@@ -19,9 +21,9 @@
         {{form.password1}}
         <label>{{form.password2.label}}</label>
         {{form.password2}}
-        <input style="margin-top: 10px;" class="boton" type="submit" value="Registrar">
+        <input style="margin-top: 10px;" class="boton" type="submit" value="{% trans 'Registrar' %}">
     </form>
-    <p>Ya tienes una cuenta? <a href="{% url 'login' %}">Ingresa</a></p>
+    <p>{% trans "Ya tienes una cuenta?" %} <a href="{% url 'login' %}">{% trans "Ingresa" %}</a></p>
 </div>
 
 {% endblock content %}
